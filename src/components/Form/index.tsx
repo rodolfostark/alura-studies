@@ -3,6 +3,10 @@ import Button from '../Button';
 import style from './form.module.scss';
 
 class Form extends React.Component {
+    state = {
+        tarefa: '',
+        tempo: '00:00',
+    }
     render() {
         return (
             <form className={style.novaTarefa}>
