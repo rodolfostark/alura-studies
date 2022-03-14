@@ -15,7 +15,7 @@ function List() {
         },
         {
             tarefa: 'TypeScript',
-            tempo: '00:30:00'
+            tempo: '00:30:07'
         }
     ];
     return (
@@ -23,7 +23,7 @@ function List() {
             <h2>Estudos do dia</h2>
             <ul>
                 {tarefas.map((item, index) => (
-                    <Item {...item}/>
+                    <Item key={index} {...item}/>
                 ))}
             </ul>
         </aside>
