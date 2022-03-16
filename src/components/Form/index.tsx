@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../Button';
 import style from './form.module.scss';
 import { ITarefa } from "../../types/tarefa";
+import { v4 as uuidv4 } from 'uuid';
 
 class Form extends React.Component<{ 
     setTarefas: React.Dispatch<React.SetStateAction<Array<ITarefa>>>
@@ -12,7 +13,18 @@ class Form extends React.Component<{
     }
     adicionarTarefa(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-        this.props.setTarefas(tarefasAntigas => [...tarefasAntigas, { ...this.state }]);
+        this.props.setTarefas(
+            tarefasAntigas => 
+            [
+                ...tarefasAntigas,
+                { 
+                    ...this.state,
+                    selecionado: false,
+                    completado: false,
+                    id: uuidv4()
+                }
+            ]
+        );
         this.setState({ tarefa: '', tempo: '00:00' }); // limpa o input  
     }
     render() {
