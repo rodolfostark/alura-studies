@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button";
 import Watch from "./Watch";
 import { ITarefa } from "../../types/tarefa";
@@ -11,15 +11,17 @@ interface Props {
 }
 
 export default function Stopwatch({ selecionado }: Props) {
-    const [ tempo, setTempo ] = useState<Number>();
-    if(selecionado?.tempo){
-        setTempo(TempoParaSegundos(selecionado.tempo));
-    }
+    const [ tempo, setTempo ] = useState<number>();
+    useEffect(() => {
+        if(selecionado?.tempo) {
+            setTempo(TempoParaSegundos(selecionado.tempo));
+        }
+    }, [selecionado]);
     return (
         <div className={style.cronometro}>
             <p className={style.titulo}>Escolha um card e inicie o cronômetro</p>
             <div className={style.relogioWrapper}>
-                <Watch />
+                <Watch tempo={tempo}/>
             </div>
             <Button>Começar</Button>
         </div>
