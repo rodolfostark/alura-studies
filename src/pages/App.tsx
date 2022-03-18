@@ -18,6 +18,22 @@ function App() {
     })));
   }
 
+  function finalizarTarefa(){
+    if(selecionado){
+      setSelecionado(undefined);
+      setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => {
+        if(tarefa.id === selecionado.id){
+          return {
+            ...tarefa,
+            selecionado: false,
+            completado: true
+          };
+        }
+        return tarefa;
+      }));
+    }
+  }
+
   return (
     <div className={style.AppStyle}>
       <Form setTarefas={setTarefas} />
@@ -25,7 +41,10 @@ function App() {
         tarefas={tarefas}
         selecionaTarefa={selecionaTarefa} 
       />
-      <Stopwatch selecionado={selecionado }/>
+      <Stopwatch 
+        selecionado={selecionado}
+        finalizarTarefa={finalizarTarefa}
+      />
     </div>
   );
 }
